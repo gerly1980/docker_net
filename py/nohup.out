@@ -1,0 +1,26 @@
+e6cd7b430688a88e176f069c751738f805c4b16f68ea2ec571295c5527833d20
+Error: No such image: i_h3
+sha256:8eb2a6081ced96a6cd4116878f90cc164115635d38c10119334815b0662ebf77
+docker run -d --name c_h3 -p 1012:22 ssh:v1
+update container set need_create='0' where container_name='c_h3'
+docker commit c_h3 i_h3
+update container set need_commit='0' where container_name='c_h3'
+delete from image where image_name='i_h3'
+insert image(image_name,homework_id) values('i_h3','3')
+Untagged: i_h3:latest
+Deleted: sha256:8eb2a6081ced96a6cd4116878f90cc164115635d38c10119334815b0662ebf77
+Deleted: sha256:ff125c50131f8d0eadf39bef412671f9a8006eac67de91a3a8d0df30b214a8a9
+sha256:9c83e35ba17610800b1cb6adf81a51f240301a6402472be0f0e60c56f0ea44d0
+docker commit c_h3 i_h3
+update container set need_commit='0' where container_name='c_h3'
+delete from image where image_name='i_h3'
+insert image(image_name,homework_id) values('i_h3','3')
+fb7bd3a946714cc446a7fa98def05a990fdaeec8d2ee3e18801c27ed4828886d
+Error response from daemon: conflict: unable to remove repository reference "i_h3" (must force) - container fb7bd3a94671 is using its referenced image 9c83e35ba176
+sha256:fd9806450bbc5897e59eb81568913e838b102413d412c56be9883bd2c61b3330
+docker run -d --name c_h3_u12 -p 1013:22 i_h3
+update container set need_create='0' where container_name='c_h3_u12'
+docker commit c_h3_u12 i_h3
+update container set need_commit='0' where container_name='c_h3_u12'
+delete from image where image_name='i_h3'
+insert image(image_name,homework_id) values('i_h3','3')
