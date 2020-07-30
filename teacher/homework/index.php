@@ -30,13 +30,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/teacher/system">
-                                系统概况
+                            <a href="/teacher/image">
+                                镜像管理
                             </a>
                         </li>
                         <li>
-                            <a href="/teacher/image">
-                                镜像管理
+                            <a href="/teacher/system">
+                                系统概况
                             </a>
                         </li>
 					</ul>

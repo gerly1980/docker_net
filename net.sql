@@ -1,162 +1,226 @@
-/*
- Navicat Premium Data Transfer
+-- phpMyAdmin SQL Dump
+-- version 4.4.15.10
+-- https://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: 2020-07-30 16:46:30
+-- 服务器版本： 5.5.62-log
+-- PHP Version: 7.0.33
 
- Source Server         : localhost
- Source Server Type    : MySQL
- Source Server Version : 80011
- Source Host           : localhost:3306
- Source Schema         : net
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
- Target Server Type    : MySQL
- Target Server Version : 80011
- File Encoding         : 65001
 
- Date: 29/07/2020 23:46:19
-*/
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+--
+-- Database: `net`
+--
 
--- ----------------------------
--- Table structure for container
--- ----------------------------
-DROP TABLE IF EXISTS `container`;
-CREATE TABLE `container` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `container_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `container`
+--
+
+CREATE TABLE IF NOT EXISTS `container` (
+  `id` int(11) NOT NULL,
+  `container_name` varchar(255) DEFAULT NULL,
   `image_name` varchar(255) DEFAULT NULL,
   `homework_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `need_create` varchar(255) DEFAULT NULL,
   `need_commit` varchar(255) DEFAULT NULL,
-  `port` int(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+  `port` int(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for homework_student
--- ----------------------------
-DROP TABLE IF EXISTS `homework_student`;
-CREATE TABLE `homework_student` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `homework_student`
+--
+
+CREATE TABLE IF NOT EXISTS `homework_student` (
+  `id` int(11) NOT NULL,
   `student_id` int(11) DEFAULT NULL,
   `homework_id` int(11) DEFAULT NULL,
-  `statu` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `statu` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of homework_student
--- ----------------------------
-BEGIN;
-INSERT INTO `homework_student` VALUES (6, 12, 1, '待完成');
-INSERT INTO `homework_student` VALUES (7, 12, 3, '待完成');
-INSERT INTO `homework_student` VALUES (8, 12, 5, '待完成');
-COMMIT;
+--
+-- 转存表中的数据 `homework_student`
+--
 
--- ----------------------------
--- Table structure for homework_teacher
--- ----------------------------
-DROP TABLE IF EXISTS `homework_teacher`;
-CREATE TABLE `homework_teacher` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+INSERT INTO `homework_student` (`id`, `student_id`, `homework_id`, `statu`) VALUES
+(35, 12, 1, '待完成'),
+(36, 12, 3, '待完成'),
+(37, 12, 5, '待完成');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `homework_teacher`
+--
+
+CREATE TABLE IF NOT EXISTS `homework_teacher` (
+  `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `des` varchar(255) DEFAULT NULL,
   `teacher_id` int(11) DEFAULT NULL,
   `image_id` int(11) DEFAULT NULL,
   `start_time` datetime DEFAULT NULL,
-  `end_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `end_time` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of homework_teacher
--- ----------------------------
-BEGIN;
-INSERT INTO `homework_teacher` VALUES (1, '测试exp1', '描述12', 14, -1, '2020-07-29 10:44:17', '2020-07-30 10:44:19');
-INSERT INTO `homework_teacher` VALUES (3, '测试exp2', '描述2', 14, -1, '2020-07-28 10:44:25', '2020-07-31 10:44:27');
-INSERT INTO `homework_teacher` VALUES (5, '测试exp3', 'ceshi3', 14, -1, '2020-07-29 11:42:58', '2020-07-30 00:00:00');
-COMMIT;
+--
+-- 转存表中的数据 `homework_teacher`
+--
 
--- ----------------------------
--- Table structure for image
--- ----------------------------
-DROP TABLE IF EXISTS `image`;
-CREATE TABLE `image` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+INSERT INTO `homework_teacher` (`id`, `title`, `des`, `teacher_id`, `image_id`, `start_time`, `end_time`) VALUES
+(1, '测试exp1', '描述12', 14, -1, '2020-07-29 10:44:17', '2020-07-30 10:44:19'),
+(3, '测试exp2', '描述2', 14, -1, '2020-07-28 10:44:25', '2020-07-31 10:44:27'),
+(5, '测试exp3', 'ceshi3', 14, -1, '2020-07-29 11:42:58', '2020-07-30 00:00:00'),
+(8, '4', '4', 14, -1, '2020-07-30 12:57:07', '2020-07-31 00:00:00'),
+(9, '5', '5', 14, -1, '2020-07-30 14:49:35', '2020-07-31 00:00:00'),
+(10, '6', '6', 14, -1, '2020-07-30 15:35:11', '2020-07-31 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `image`
+--
+
+CREATE TABLE IF NOT EXISTS `image` (
+  `id` int(11) NOT NULL,
   `image_name` varchar(255) DEFAULT NULL,
   `homework_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+  `need_del` int(255) DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for port
--- ----------------------------
-DROP TABLE IF EXISTS `port`;
-CREATE TABLE `port` (
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `port`
+--
+
+CREATE TABLE IF NOT EXISTS `port` (
   `port` int(255) NOT NULL,
-  `flag` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`port`)
+  `flag` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of port
--- ----------------------------
-BEGIN;
-INSERT INTO `port` VALUES (1000, '0');
-INSERT INTO `port` VALUES (1001, '0');
-INSERT INTO `port` VALUES (1002, '0');
-INSERT INTO `port` VALUES (1003, '0');
-INSERT INTO `port` VALUES (1004, '0');
-INSERT INTO `port` VALUES (1005, '0');
-INSERT INTO `port` VALUES (1006, '0');
-INSERT INTO `port` VALUES (1007, '0');
-INSERT INTO `port` VALUES (1008, '0');
-INSERT INTO `port` VALUES (1009, '0');
-INSERT INTO `port` VALUES (1010, '0');
-INSERT INTO `port` VALUES (1011, '0');
-INSERT INTO `port` VALUES (1012, '0');
-INSERT INTO `port` VALUES (1013, '0');
-INSERT INTO `port` VALUES (1014, '0');
-INSERT INTO `port` VALUES (1015, '0');
-INSERT INTO `port` VALUES (1016, '0');
-INSERT INTO `port` VALUES (1017, '0');
-INSERT INTO `port` VALUES (1018, '0');
-INSERT INTO `port` VALUES (1019, '0');
-INSERT INTO `port` VALUES (1020, '0');
-INSERT INTO `port` VALUES (1021, '0');
-INSERT INTO `port` VALUES (1022, '0');
-INSERT INTO `port` VALUES (1023, '0');
-INSERT INTO `port` VALUES (1024, '0');
-INSERT INTO `port` VALUES (1025, '0');
-INSERT INTO `port` VALUES (1026, '0');
-INSERT INTO `port` VALUES (1027, '0');
-INSERT INTO `port` VALUES (1028, '0');
-INSERT INTO `port` VALUES (1029, '0');
-INSERT INTO `port` VALUES (1030, '0');
-COMMIT;
+--
+-- 转存表中的数据 `port`
+--
 
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+INSERT INTO `port` (`port`, `flag`) VALUES
+(1050, '0'),
+(1051, '0'),
+(1052, '0'),
+(1053, '0'),
+(1054, '0'),
+(1055, '0'),
+(1056, '0'),
+(1057, '0'),
+(1058, '0'),
+(1059, '0'),
+(1060, '0');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
   `passwd` varchar(255) DEFAULT NULL,
   `teacher_id` int(11) DEFAULT NULL,
   `time` datetime DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+  `type` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of user
--- ----------------------------
-BEGIN;
-INSERT INTO `user` VALUES (12, 'stu', '63ee451939ed580ef3c4b6f0109d1fd0', 14, '2020-07-25 16:05:59', 'student');
-INSERT INTO `user` VALUES (14, 'tea', '63ee451939ed580ef3c4b6f0109d1fd0', -1, '2020-07-27 17:38:40', 'teacher');
-INSERT INTO `user` VALUES (15, 'tea2', '63ee451939ed580ef3c4b6f0109d1fd0', -1, '2020-07-29 10:31:16', 'teacher');
-COMMIT;
+--
+-- 转存表中的数据 `user`
+--
 
-SET FOREIGN_KEY_CHECKS = 1;
+INSERT INTO `user` (`id`, `username`, `passwd`, `teacher_id`, `time`, `type`) VALUES
+(12, 'stu', '63ee451939ed580ef3c4b6f0109d1fd0', 14, '2020-07-25 16:05:59', 'student'),
+(14, 'tea', '63ee451939ed580ef3c4b6f0109d1fd0', -1, '2020-07-27 17:38:40', 'teacher'),
+(16, 'admin', '63ee451939ed580ef3c4b6f0109d1fd0', -1, '2020-07-30 11:09:23', 'admin');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `container`
+--
+ALTER TABLE `container`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `homework_student`
+--
+ALTER TABLE `homework_student`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `homework_teacher`
+--
+ALTER TABLE `homework_teacher`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `image`
+--
+ALTER TABLE `image`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `port`
+--
+ALTER TABLE `port`
+  ADD PRIMARY KEY (`port`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `container`
+--
+ALTER TABLE `container`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
+--
+-- AUTO_INCREMENT for table `homework_student`
+--
+ALTER TABLE `homework_student`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
+--
+-- AUTO_INCREMENT for table `homework_teacher`
+--
+ALTER TABLE `homework_teacher`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `image`
+--
+ALTER TABLE `image`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

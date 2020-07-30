@@ -5,25 +5,8 @@
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Welcome - Linux实验平台</title>
+    <title>Admin</title>
 </head>
-
-<?php
-    session_start();
-if(isset($_SESSION["teacher"]))
-{
-    echo "<script>url=\"/teacher\";window.location.href=url;</script>";
-}
-else if(isset($_SESSION["student"]))
-{
-    echo "<script>url=\"/student\";window.location.href=url;</script>";
-}
-else if(isset($_SESSION["admin"]))
-{
-    echo "<script>url=\"/admin\";window.location.href=url;</script>";
-}
-?>
-
 <body>
 <div class="container">
     <div class="row clearfix">
@@ -36,31 +19,36 @@ else if(isset($_SESSION["admin"]))
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/student/">Linux标准化实验平台</a>
+                    <a class="navbar-brand" href="/admin/">Linux标准化实验平台</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                                操作
-                                <strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="/fun/login">登录</a>
-                                </li>
-                                <li>
-                                    <a href="/fun/register">注册</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="#">关于我们</a>
-                                </li>
-                            </ul>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/admin/system">
+                                系统概况
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/user">
+                                用户管理
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/container">
+                                容器管理
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/image">
+                                镜像管理
+                            </a>
                         </li>
                     </ul>
+                    <?php
+                    include "../fun/login_status.php";
+                    ?>
                 </div>
-
             </nav>
             <div class="jumbotron">
                 <h1>

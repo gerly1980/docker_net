@@ -1,10 +1,9 @@
 <?php
-include '../../fun/conn.php';
+include '../../../fun/conn.php';
 $conn = new mysqli($servername, $dbusername, $dbpasswd, $dbname);
 //                echo "<script>alert('$username')</script>";
 
-if(isset($_GET["id"]))
-    $homework_id = $_GET["id"];
+$homework_id = -1;
 if(isset($_GET["user_id"]))
     $user_id = $_GET["user_id"];
 
@@ -16,6 +15,6 @@ $sql = "select port from container where homework_id='$homework_id' and user_id=
 $result = $conn->query($sql);
 list($port) = $result->fetch_row();
 
-$str = "使用ssh -p ".$port." root@ip连接,密码为1021822981,完成后在列表保存即可";
+$str = "使用ssh -p ".$port." root@ip连接,密码为1021822981";
 echo "<script>alert('$str')</script>;";
-echo "<script>url=\"/teacher/image/\";window.location.href=url;</script>";
+echo "<script>url=\"/student/apply/\";window.location.href=url;</script>";

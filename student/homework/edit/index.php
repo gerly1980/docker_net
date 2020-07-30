@@ -16,6 +16,6 @@ $sql = "select port from container where homework_id='$homework_id' and user_id=
 $result = $conn->query($sql);
 list($port) = $result->fetch_row();
 
-$str = "使用ssh -p ".$port." root@ip连接,密码为1021822981,完成后在列表保存即可";
+$str = "使用ssh -p ".$port." root@ip连接,密码为1021822981";
 echo "<script>alert('$str')</script>;";
 echo "<script>url=\"/student/homework/\";window.location.href=url;</script>";

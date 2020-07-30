@@ -5,14 +5,8 @@
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Teacher</title>
+    <title>Admin</title>
 </head>
-
-<?php
-
-?>
-
-
 <body>
 <div class="container">
     <div class="row clearfix">
@@ -25,33 +19,44 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/teacher">Linux标准化实验平台</a>
+                    <a class="navbar-brand" href="/admin/">Linux标准化实验平台</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/teacher/homework">
-                                我布置的实验
-                            </a>
-                        </li>
-                        <li  class="active">
-                            <a href="/teacher/image">
-                                镜像管理
-                            </a>
-                        </li>
-                        <li >
-                            <a href="/teacher/system">
+                            <a href="/admin/system">
                                 系统概况
                             </a>
                         </li>
-                    </ul>
+                        <li>
+                            <a href="/admin/user">
+                                用户管理
+                            </a>
+                        </li>
 
+                        <li class="active">
+                            <a href="/admin/container">
+                                容器管理
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/image">
+                                镜像管理
+                            </a>
+                        </li>
+                    </ul>
                     <?php
                     include "../../fun/login_status.php";
                     ?>
-
                 </div>
             </nav>
+
+            <p>
+                <strong>命名规则:</strong> <br>
+                若是<strong>Container</strong>，用户id为1，作业id为2，则命名为<strong>c_u1_h2</strong>;
+                <br>
+                若是id为3的学生自行申请的Container  <em>(作业id不存在)</em>  则命名为<strong>c_u3_h-1</strong>;
+            </p>
 
             <table class="table">
                 <thead>
@@ -60,15 +65,18 @@
                         id
                     </th>
                     <th>
-                        标题
+                        container名称
                     </th>
                     <th>
-                        开始时间
+                        image名称
                     </th>
                     <th>
-                        结束时间
+                        创建者
                     </th>
-                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <th>
+                        端口
+                    </th>
+                    <th>
                         操作
                     </th>
                 </tr>
@@ -83,18 +91,10 @@
                 if (!$conn) {
                     exit("连接失败: " . $conn->connect_error);
                 }
-                //查找用户的教师id和当前用户id
-                $sql = "select id from user where username='$username'";
-                $resuqlt11 = $conn->query($sql);
-                list($u_id) = $resuqlt11->fetch_row();
-
-
-                $sql = "select homework_teacher.id,homework_teacher.title,
-                    homework_teacher.start_time,homework_teacher.end_time,user.id
-                    from homework_teacher,user where user.username='$username'
-                     and homework_teacher.teacher_id=user.id";
+                $sql = "select container.id,container_name,image_name,username,port from container,user where user_id=user.id";
                 $result = $conn->query($sql);
-                while(list($id,$title,$start_time,$end_time,$user_id) = $result->fetch_row())
+                echo $conn->error;
+                while(list($id,$container_name,$image_name,$username,$port) = $result->fetch_row())
                 {
 
                     echo "
@@ -103,39 +103,21 @@
                             $id
                         </td>
                         <td>
-                            $title
+                            $container_name
                         </td>
                         <td>
-                            $start_time
+                            $image_name
                         </td>
                         <td>
-                            $end_time
+                            $username
                         </td>
                         <td>
-                        ";
-                    $sql = "select count(*) from container where homework_id='$id'";
-                    $result2 = $conn->query($sql);
-                    list($amount) = $result2->fetch_row();
-//                    echo "<script>alert('$amount')</script>";
-                    //镜像已存在
-                    if($amount!=0)
-                    {
-                        //查找c_id
-                        $sql = "select id from container where homework_id='$id' and user_id='$u_id'";
-                        $result4 = $conn->query($sql);
-                        list($c_id) = $result4->fetch_row();
-
-                        echo "<a href='edit.php?id=$id&user_id=$user_id'>定制容器</a>";
-                        echo "&nbsp;&nbsp;";
-                        echo "<a href='save.php?id=$id&user_id=$user_id'>保存为镜像</a>";
-                        echo "&nbsp;&nbsp;";
-                        echo "<a href='delete?id=$c_id'>删除容器</a>";
-                    }
-                    else
-                    {
-                        echo "<a href='create.php?id=$id&user_id=$user_id'>添加一个基容器</a>";
-                    }
-                        echo "</td>
+                            $port
+                        </td>
+                        <td>
+                            <a href='delete?id=$id' onclick=\"return confirm('确定删除当前容器？')\">Delete</a>
+                            &nbsp;&nbsp;&nbsp;
+                        </td>
                     </tr>
                     ";
                 }

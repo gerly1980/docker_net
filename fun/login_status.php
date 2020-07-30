@@ -10,6 +10,10 @@ else if(isset($_SESSION["student"]))
 {
     $username = $_SESSION["student"];
     $flag = 1;
+}else if(isset($_SESSION["admin"]))
+{
+    $username = $_SESSION["admin"];
+    $flag = 1;
 }
 
 if($flag == 1)

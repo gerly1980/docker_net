@@ -29,6 +29,10 @@ if ($result->num_rows > 0) {
                 $_SESSION['student'] = $row["username"];
                 echo "<script>url=\"/student\";window.location.href=url;</script>";
             }
+            else if ($row["type"] == 'admin') {
+                $_SESSION['admin'] = $row["username"];
+                echo "<script>url=\"/admin\";window.location.href=url;</script>";
+            }
         }
         else {
             echo "<script>alert('用户名或密码不正确!');history.back();</script>";
