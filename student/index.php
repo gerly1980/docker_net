@@ -32,7 +32,8 @@
 						</li>
 					</ul>
                     <?php
-                        include "../fun/login_status.php";
+                        include "../fun/login_status.php";                    
+
                     ?>
 
 				</div>

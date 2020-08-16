@@ -47,6 +47,14 @@
                     </ul>
                     <?php
                     include "../../fun/login_status.php";
+                    
+                    if(!isset($_SESSION["admin"]))
+                    {
+                    	
+                		echo "<script>url='/';window.location.href=url;</script>";
+                    	exit(0);
+                    }
+                    
                     ?>
                 </div>
             </nav>
@@ -60,6 +68,9 @@
                     </th>
                     <th>
                         用户名
+                    </th>
+                    <th>
+                        用户类型
                     </th>
                     <th>
                         注册时间
@@ -79,9 +90,9 @@
                 if (!$conn) {
                     exit("连接失败: " . $conn->connect_error);
                 }
-                $sql = "select id,username,time from user";
+                $sql = "select id,username,time,type from user";
                 $result = $conn->query($sql);
-                while(list($id,$username,$time) = $result->fetch_row())
+                while(list($id,$username,$time,$type) = $result->fetch_row())
                 {
 
                     echo "
@@ -91,6 +102,9 @@
                         </td>
                         <td>
                             $username
+                        </td>
+                        <td>
+                            $type
                         </td>
                         <td>
                             $time

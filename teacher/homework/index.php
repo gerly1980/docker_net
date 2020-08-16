@@ -41,7 +41,13 @@
                         </li>
 					</ul>
                     <?php
-                    include "../../fun/login_status.php";
+                    include "../../fun/login_status.php"; 
+	                    if(!isset($_SESSION["teacher"]))
+	                    {
+	                    	
+	                		echo "<script>url='/';window.location.href=url;</script>";
+	                    	exit(0);
+	                    }
                     ?>
 				</div>
 			</nav>
