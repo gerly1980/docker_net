@@ -2,6 +2,6 @@
 
 该系统基于lamp docker python3。
 
-在根目录下使用`nohub python3 py/test.py `命令开启容器分配服务，注意请不要Ctrl+C结束服务，**直接关闭终端窗口**以保证其后台运行。
+在根目录下使用`nohub python3 py/test.py &`命令开启容器分配服务。
 
 体验账号: teacher 123 student 123 admin 123
